@@ -333,7 +333,7 @@
 	])
 	```
 
-- ###### 39: Courses' name which has been taught by `Mr.Montazeri`
+- ###### 39: Courses' name which have been taught by `Mr.Montazeri`
 	```
 	db.students.aggregate(
 	[
