@@ -230,7 +230,7 @@
 	db.students.find({"passed_courses.score" : {$not: {$lte: 16}}})
 	```
 
-- ###### 34: Students who have passed more than 5 
+- ###### 34: Students who have passed more than 5 courses
 	```
 	db.students.aggregate(
 	[
@@ -247,7 +247,7 @@
 	])
 	```
 
-- ###### 35: Students who have passed more than 5  or have `OS` in this semester
+- ###### 35: Students who have passed more than 5  courses or have `OS` in this semester
 	```
 	db.students.aggregate(
 	[
