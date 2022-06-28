@@ -343,7 +343,7 @@
 	])
 	```
 
-- ###### 40:  Courses' name which has been taught by `Mr.Taheri` in the year 97
+- ###### 40:  Courses' name which were taught by `Mr.Taheri` in the year 97
 	```
 	db.students.aggregate(  
 	[        
