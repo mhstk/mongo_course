@@ -334,8 +334,8 @@
 - ###### 40:  Courses' name which has been taught by `Mr.Taheri` in the year 97
 	```
 	db.students.aggregate(  
-	[        {$unwind: "$passed_courses"},  
+	[        
+		{$unwind: "$passed_courses"},  
 		{$match: {"passed_courses.master": "Mr.Taheri", "passed_courses.year": 97}},  
 		{$group: {_id: "$passed_courses.name"}}  
 	])
-	```
