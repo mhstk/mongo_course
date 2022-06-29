@@ -190,7 +190,7 @@
 	])
 	```
 
-	- ###### 29: Courses which were offered at first semester in the year 94 
+- ###### 29: Courses which were offered at first semester in the year 94 
 	```
 	db.students.aggregate(
 	[
