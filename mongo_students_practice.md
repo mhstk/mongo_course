@@ -135,20 +135,24 @@
 - ###### 26: The year and the semester in which the oldest course was offered
 	```
 	db.students.aggregate(
-	[
-		{$unwind: "$passed_courses"},
-		{$sort: {"passed_courses.year": 1}},
-		{$project:
-			{
-				"year": "$passed_courses.year",
-				"term": "$passed_courses.term"
-			}
-		}
-	]
-	)
+    [
+        {$unwind: "$passed_courses"},
+        {$sort: {"passed_courses.year": 1}},
+        {$project:
+                {
+                    "year": "$passed_courses.year",
+                    "term": "$passed_courses.term"
+                }
+        },
+        {$limit: 1}
+    ]
+    )
 	```
 
 - ###### 27:  Students who have failed `MongoDB` course
+	```
+	db.students.find({passed_courses: {$elemMatch: {name: "MongoDB", score: {$lt: 10}}}})
+	```
 	```
 	db.students.aggregate(
     [
@@ -166,6 +170,9 @@
 	```
 
 - ###### 28: Students who have passed `Algorithm_Design` course with `Mr.Fatehi`
+	```
+	db.students.find({passed_courses: {$elemMatch: {name: "Algorithm_Design", master: "Mr.Fatehi"}}})
+	```
 	```
 	db.students.aggregate(
 	[
