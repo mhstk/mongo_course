@@ -237,50 +237,19 @@
 	db.students.find({"passed_courses.score" : {$not: {$lte: 16}}})
 	```
 
-- ###### 34: Students who have passed more than 5 courses
+- ###### 34: Students who have had more than 5 courses
 	```
-	db.students.aggregate(
-	[
-		{$unwind: "$passed_courses"},
-		{$match: {"passed_courses.score": {$gte: 10}}},
-		{$group: {_id: {_id: "$_id", name: "$name"}, passed_courses_count : {$count: {}}}},
-		{$match: {"passed_courses_count": {$gt: 5}}},
-		{$project: {
-				"_id" : "$_id._id",
-				"name" : "$_id.name",
-				"passed_courses_count": 1
-			}
-		}
-	])
+	db.students.find({"passed_courses.5": {$exists: true}})
 	```
 
-- ###### 35: Students who have passed more than 5  courses or have `OS` in this semester
+- ###### 35: Students who have had more than 5  courses or have `OS` in this semester
 	```
-	db.students.aggregate(
-	[
-		{$unwind: "$passed_courses"},
-		{$match: {"passed_courses.score": {$gte: 10}}},
-		{$group: {_id: {_id: "$_id", name: "$name"}, passed_courses_count : {$count: {}}}},
-		{$match: {"passed_courses_count": {$gt: 5}}},
-		{$project: {
-				"_id" : "$_id._id",
-				"name" : "$_id.name",
-				"passed_courses_count" : 1
-			}
-		},
-		{$unionWith: {coll: "students", pipeline:
-					[
-						{$match: {"current_courses": "OS"}},
-						{$project: {_id: 1, name: 1, "passed_courses_count": null}}
-					]
-		}},
-		{$group: {_id: {_id: "$_id", name: "$name"}}},
-		{$project: {
-				"_id" : "$_id._id",
-				"name" : "$_id.name"
-		}},
-		{$sort: {_id: 1}}
-	])
+	db.students.find({
+    $or: [
+        {"passed_courses.5": {$exists: true}},
+        {current_courses: "OS"}
+	]
+	})
 	```
 
 - ###### 36:  Teachers' name who have given the lowest score in alphabetical order
