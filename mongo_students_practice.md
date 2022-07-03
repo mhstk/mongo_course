@@ -171,7 +171,7 @@
 
 - ###### 28: Students who have passed `Algorithm_Design` course with `Mr.Fatehi`
 	```
-	db.students.find({passed_courses: {$elemMatch: {name: "Algorithm_Design", master: "Mr.Fatehi"}}})
+	db.students.find({passed_courses: {$elemMatch: {name: "Algorithm_Design", master: "Mr.Fatehi", "score": {$gte: 10}}}})
 	```
 	```
 	db.students.aggregate(
