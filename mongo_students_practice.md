@@ -224,7 +224,7 @@
 
 - ###### 31: Students who have passed `MongoDB` course as their second course
 	```
-	db.students.find({"passed_courses.score": {$gte: 10},"passed_courses.1.name" : "MongoDB"})
+	db.students.find({"passed_courses.1.name" : "MongoDB"})
 	```
 
 - ###### 32: Students who don't have score less than 10
